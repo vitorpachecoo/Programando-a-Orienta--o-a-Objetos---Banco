@@ -1,45 +1,27 @@
-class Cliente {
-  nome;
-  cpf;
-}
-
-class ContaCorrente {
-  agencia;
-  _saldo = 0;
-
-  sacar(valor) {
-    //Verifica se o saldo da conta corrente é igual ou maior do que o valor de saque desejavel
-    if (this._saldo >= valor) {
-      this._saldo -= valor;
-      return valor;
-    }
-  }
-
-  depositar(valor) {
-    if (valor > 0) {
-      this._saldo += valor;
-    }
-  }
-}
+import {Cliente} from './Cliente.js'
+import {ContaCorrente} from './ContaCorrente.js'
 
 const cliente1 = new Cliente();
 cliente1.nome = "Vitor";
-cliente1.cpf = 07321586219;
+cliente1.cpf = 7321586219;
 
 const cliente2 = new Cliente();
 cliente2.nome = "Laura";
-cliente2.cpf = 06821570515;
+cliente2.cpf = 6821570515;
 
 const contaCorrenteVitor = new ContaCorrente();
-contaCorrenteVitor.saldo = 0;
+contaCorrenteVitor._saldo = 0;
 contaCorrenteVitor.agencia = 1001;
+contaCorrenteVitor.cliente = cliente1;
+contaCorrenteVitor.depositar(500);
 
-contaCorrenteVitor.depositar(100);
-contaCorrenteVitor.depositar(100);
+const contaCorrenteLaura = new ContaCorrente();
+contaCorrenteLaura.agencia = 1002;
+contaCorrenteLaura.cliente = cliente2;
 
 
-const valorSacado = contaCorrenteVitor.sacar(50);
-console.log(valorSacado);
-
+contaCorrenteVitor.transferir(250, contaCorrenteLaura);
 
 console.log(contaCorrenteVitor);
+console.log(contaCorrenteLaura);
+
